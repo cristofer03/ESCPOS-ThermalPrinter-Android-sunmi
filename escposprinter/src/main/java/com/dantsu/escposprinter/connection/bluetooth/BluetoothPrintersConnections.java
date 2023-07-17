@@ -16,7 +16,7 @@ public class BluetoothPrintersConnections extends BluetoothConnections {
      * @return a EscPosPrinterCommands instance
      */
     public static BluetoothConnection selectFirstPaired() {
-        BluetoothPrintersConnections printers = new MyBluetoothPrintersConnections();
+        BluetoothPrintersConnections printers = new BluetoothPrintersConnections();
         BluetoothConnection[] bluetoothPrinters = printers.getList();
 
         if (bluetoothPrinters != null && bluetoothPrinters.length > 0) {
