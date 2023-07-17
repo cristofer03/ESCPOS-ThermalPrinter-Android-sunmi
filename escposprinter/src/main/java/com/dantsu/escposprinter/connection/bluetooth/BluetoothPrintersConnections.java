@@ -15,9 +15,8 @@ public class BluetoothPrintersConnections extends BluetoothConnections {
      *
      * @return a EscPosPrinterCommands instance
      */
-    @Nullable
     public static BluetoothConnection selectFirstPaired() {
-        BluetoothPrintersConnections printers = new BluetoothPrintersConnections();
+        BluetoothPrintersConnections printers = new MyBluetoothPrintersConnections();
         BluetoothConnection[] bluetoothPrinters = printers.getList();
 
         if (bluetoothPrinters != null && bluetoothPrinters.length > 0) {
@@ -32,13 +31,13 @@ public class BluetoothPrintersConnections extends BluetoothConnections {
         return null;
     }
 
+
     /**
      * Get a list of bluetooth printers.
      *
      * @return an array of EscPosPrinterCommands
      */
     @SuppressLint("MissingPermission")
-    @Nullable
     public BluetoothConnection[] getList() {
         BluetoothConnection[] bluetoothDevicesList = super.getList();
 
@@ -54,7 +53,7 @@ public class BluetoothPrintersConnections extends BluetoothConnections {
             int majDeviceCl = device.getBluetoothClass().getMajorDeviceClass(),
                     deviceCl = device.getBluetoothClass().getDeviceClass();
 
-            if (majDeviceCl == BluetoothClass.Device.Major.IMAGING && (deviceCl == 1664 || deviceCl == BluetoothClass.Device.Major.IMAGING)) {
+            if ((majDeviceCl == BluetoothClass.Device.Major.IMAGING && (deviceCl == 1664 || deviceCl == BluetoothClass.Device.Major.IMAGING)) || device.getName().equals("InnerPrinter")) {
                 printersTmp[i++] = new BluetoothConnection(device);
             }
         }
